@@ -28,8 +28,8 @@ module Resolvers
 
     def normalize_filters(value, branches = [])
       scope = Link.all
-      scope = scope.where('description LIKE :query', query: "%#{value[:description_contains]}%") if value[:description_contains]
-      scope = scope.where('url LIKE :query', query: "%#{value[:url_contains]}%") if value[:url_contains]
+      scope = scope.like(:description, value[:description_contains]) if value[:description_contains]
+      scope = scope.like(:url,         value[:url_contains])         if value[:url_contains]
 
       branches << scope
 
