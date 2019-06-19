@@ -133,3 +133,11 @@ query {
     url
   }
 }
+
+{
+  allLinks(skip: 1, first: 10) {
+    id
+    description
+    url
+  }
+}
