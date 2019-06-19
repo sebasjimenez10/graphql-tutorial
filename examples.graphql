@@ -1,120 +1,133 @@
 # Welcome to GraphiQL
-#
+
 # GraphiQL is an in-browser tool for writing, validating, and
 # testing GraphQL queries.
-#
+
 # Type queries into this side of the screen, and you will see intelligent
 # typeaheads aware of the current GraphQL type schema and live syntax and
 # validation errors highlighted within the text.
-#
+
 # GraphQL queries typically start with a "{" character. Lines that starts
 # with a # are ignored.
-#
+
 # An example GraphQL query might look like:
-#
+
 #     {
 #       field(arg: "value") {
 #         subField
 #       }
 #     }
-#
+
 # Keyboard shortcuts:
-#
+
 #  Prettify Query:  Shift-Ctrl-P (or press the prettify button above)
-#
+
 #       Run Query:  Ctrl-Enter (or press the play button above)
-#
+
 #   Auto Complete:  Ctrl-Space (or just start typing)
-#
 
-# {
-#   allLinks {
-#     id
-#     url
-#     description
-#     postedBy {
-#       id
-#       name
-#       email
-#     }
-#   }
-# }
 
-# mutation {
-#   createLink(
-#     description: "Google: Search engine",
-#     url: "https://www.google.com"
-#   ) {
-#     id
-#     url
-#     description
-#   }
-# }
+{
+  allLinks {
+    id
+    url
+    description
+    postedBy {
+      id
+      name
+      email
+    }
+  }
+}
 
-# mutation {
-#   createUser(
-#     name: "Sebastian Jimenez",
-#     authProvider: {
-#       email: {
-#         email: "sebastian@envoy.com",
-#         password: "password"
-#       }
-#     }
-#   ) {
-#     id
-#     name
-#     email
-#   }
-# }
+mutation {
+  createLink(
+    description: "Google: Search engine",
+    url: "https://www.google.com"
+  ) {
+    id
+    url
+    description
+  }
+}
 
-# mutation {
-#   signinUser(
-#     email: {
-#       email: "sebastian@envoy.com",
-#       password: "password"
-#     }
-#   ) {
-#     token
-#     user {
-#       id
-#     }
-#   }
-# }
+mutation {
+  createUser(
+    name: "Sebastian Jimenez",
+    authProvider: {
+      email: {
+        email: "sebastian@envoy.com",
+        password: "password"
+      }
+    }
+  ) {
+    id
+    name
+    email
+  }
+}
 
-# mutation {
-#   createVote(linkId: "4") {
-#     link {
-#       id
-#     },
-#     user {
-#       name
-#     }
-#   }
-# }
+mutation {
+  signinUser(
+    email: {
+      email: "sebastian@envoy.com",
+      password: "password"
+    }
+  ) {
+    token
+    user {
+      id
+    }
+  }
+}
 
-# query {
-#   allLinks {
-#     votes {
-#       id
-#     }
-#   }
-# }
+mutation {
+  createVote(linkId: "4") {
+    link {
+      id
+    },
+    user {
+      name
+    }
+  }
+}
 
-# query {
-#   allLinks {
-#     unknow
-#   }
-# }
+query {
+  allLinks {
+    votes {
+      id
+    }
+  }
+}
 
-# mutation {
-#   createLink(url: "", description: "")
-#   {
-#     id
-#   }
-# }
+query {
+  allLinks {
+    unknow
+  }
+}
+
+mutation {
+  createLink(url: "", description: "")
+  {
+    id
+  }
+}
 
 query {
   allLinks(filter: { urlContains: "https" }) {
+    id
+    description
+    url
+  }
+}
+
+{
+  allLinks(filter: {
+    urlContains: "https",
+    OR: {
+      urlContains: "http"
+    }
+  }) {
     id
     description
     url
